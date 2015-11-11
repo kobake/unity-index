@@ -1,0 +1,7 @@
+DirectoryIndex index.php index.cgi index.htm index.html 403.html
+<Files 403.html>
+	deny from all
+</Files>
+<Files *.txt>
+	allow from all
+</Files>
