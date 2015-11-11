@@ -1,7 +1,14 @@
-DirectoryIndex index.php index.cgi index.htm index.html 403.html
+DirectoryIndex index.html index.html.gz 403.html
 <Files 403.html>
 	deny from all
 </Files>
-<Files *.txt>
-	allow from all
-</Files>
+
+RewriteEngine on
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}\.gz -s
+RewriteRule .+ %{REQUEST_URI}.gz
+
+<FilesMatch "\.html\.gz$">
+	ForceType text/html
+	AddEncoding x-gzip .gz
+</FilesMatch>
