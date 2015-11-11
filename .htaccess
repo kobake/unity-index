@@ -1,7 +1,4 @@
-DirectoryIndex index.html index.html.gz 403.html
-<Files 403.html>
-	deny from all
-</Files>
+DirectoryIndex index.html.gz
 
 RewriteEngine on
 RewriteCond %{HTTP:Accept-Encoding} gzip

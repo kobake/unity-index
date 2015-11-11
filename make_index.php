@@ -80,7 +80,7 @@ echo $text;
 
 <div class="foot">
 	<div>
-	<a href="http://japan.unity3d.com/" target="_blank">Unity</a> is provided by <a href="http://japan.unity3d.com/company/public-relations/" target="_blank">Unity Technologies</a>.
+	<a href="http://unity3d.com/" target="_blank">Unity</a> is provided by <a href="http://unity3d.com/public-relations" target="_blank">Unity Technologies</a>.
 	</div>
 
 	<div>
