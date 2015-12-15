@@ -9,11 +9,32 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		// Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity\Editor\Data\Managed\UnityEngine.dll");
-		Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.2.2p1\Editor\Data\Managed\UnityEngine.dll");
-		// Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.1.3p3\Editor\Data\Managed\UnityEditor.dll");
-		
-		foreach (Type type in assembly.GetTypes())
+		try
+		{
+			Main2(args);
+		}
+		catch (Exception ex)
+		{
+			Console.WriteLine(ex);
+		}
+	}
+	static Type[] GetTypes(Assembly assembly)
+	{
+		try
+		{
+			return assembly.GetTypes();
+		}
+		catch (ReflectionTypeLoadException ex)
+		{
+			return ex.Types;
+		}
+	}
+	static void Main2(string[] args)
+	{
+		//Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.2.3p1\Editor\Data\Managed\UnityEditor.dll");
+		Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.2.3p1\Editor\Data\Managed\UnityEngine.dll");
+
+		foreach (Type type in GetTypes(assembly))
 		{
 			Console.WriteLine(type.ToString());
 			/*
