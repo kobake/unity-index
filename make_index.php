@@ -59,12 +59,72 @@
 		margin-top: 12px;
 		margin-bottom: 8px;
 	}
+#filter-input{
+		border:0;
+		padding:10px;
+		font-size:1.3em;
+		font-family:Arial, sans-serif;
+		color:#666;
+		border:solid 1px #ccc;
+		margin:0 0 20px;
+		
+		width: 100%;
+		max-width: 300px;
+		padding: 4px 6px;
+	}
 	</style>
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+		$(function(){
+			var last = "";
+			$('#filter-input').keyup(function(){
+				var keyword = $(this).val().toLowerCase();
+				if(keyword == last)return;
+				last = keyword;
+				
+				// フィルタリング.
+				(function(){
+					// キーワードが3文字未満の場合は何もしない.
+					if(keyword.length < 3){
+						$('tr').show();
+						$('.parent').show();
+						return;
+					}
+					
+					// フィルタリング.
+					$('table').each(function(){
+						var $table = $(this);
+						var anythingFound = false;
+						$table.find('tr').each(function(){
+							var text = $(this).text().toLowerCase();
+							var found = (text.indexOf(keyword) >= 0);
+							$(this).toggle(found);
+							if(found){
+								anythingFound = true;
+							}
+						});
+
+						// 1件もヒットしなかったテーブルは非表示にする.
+						var tableVisible = anythingFound;
+						$table.toggle(tableVisible);
+						$table.prev().toggle(tableVisible);
+					});
+				})();
+			});
+		});
+	</script>
 </head>
 <body>
 <h1>
 Unity 5.2.2p1 UnityEngine.dll symbol list
 </h1>
+
+<div>
+	<div style="margin-bottom: 4px;">
+	Filter:
+	</div>
+	<input id="filter-input" type="text" />
+</div>
 
 <?php
 $text = '';
