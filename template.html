@@ -1,0 +1,144 @@
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Unity {$VER} {$DLL}.dll symbol list</title>
+	<style>
+	*{
+		font-family: 'ＭＳ ゴシック';
+		font-size: 10pt;
+	}
+	body{
+		padding: 10px 5px;
+	}
+	h1{
+		font-size: 20pt;
+		color: #333;
+	}
+	h1 a{
+		font-size: 20pt;
+		text-decoration: none;
+	}
+	.parent{
+		margin-top: 10px;
+		color: red;
+	}
+	table{
+		margin-left: 20px;
+		color: #222;
+		border-collapse: collapse;
+		margin-top: 6px;
+	}
+	table td{
+		padding: 2px 4px;
+	}
+	tr{
+		border: 1px solid #999;
+	}
+	td.type{
+		padding-right: 10px;
+		max-width: 300px;
+	}
+	td.right{
+		padding-right: 10px;
+		max-width: 500px;
+	}
+	td.type, td.right{
+		word-break : break-all;
+	}
+	.foot{
+		margin-top: 18px;
+		border-top: 1px solid #999;
+		padding-top: 4px;
+		padding-left: 1px;
+	}
+	.foot div{
+		margin-top: 4px;
+	}
+	.foot div:nth-child(2){
+		margin-top: 12px;
+		margin-bottom: 8px;
+	}
+#filter-input{
+		border:0;
+		padding:10px;
+		font-size:1.3em;
+		font-family:Arial, sans-serif;
+		color:#666;
+		border:solid 1px #ccc;
+		margin:0 0 20px;
+		
+		width: 100%;
+		max-width: 300px;
+		padding: 4px 6px;
+	}
+	</style>
+	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script>
+		$(function(){
+			var last = "";
+			$('#filter-input').keyup(function(){
+				var keyword = $(this).val().toLowerCase();
+				if(keyword == last)return;
+				last = keyword;
+				
+				// フィルタリング.
+				(function(){
+					// キーワードが3文字未満の場合は何もしない.
+					if(keyword.length < 3){
+						$('tr').show();
+						$('.parent').show();
+						return;
+					}
+					
+					// フィルタリング.
+					$('table').each(function(){
+						var $table = $(this);
+						var anythingFound = false;
+						$table.find('tr').each(function(){
+							var text = $(this).text().toLowerCase();
+							var found = (text.indexOf(keyword) >= 0);
+							$(this).toggle(found);
+							if(found){
+								anythingFound = true;
+							}
+						});
+
+						// 1件もヒットしなかったテーブルは非表示にする.
+						var tableVisible = anythingFound;
+						$table.toggle(tableVisible);
+						$table.prev().toggle(tableVisible);
+					});
+				})();
+			});
+		});
+	</script>
+</head>
+<body>
+<h1>
+Unity {$VER} {$DLL}.dll symbol list
+</h1>
+
+<div>
+	<div style="margin-bottom: 4px;">
+	Filter:
+	</div>
+	<input id="filter-input" type="text" />
+</div>
+
+{$BODY}
+
+<script type="text/javascript" src="http://clock-up.jp/acc/acctag.js"></script>
+
+<div class="foot">
+	<div>
+	<a href="http://unity3d.com/" target="_blank">Unity</a> is provided by <a href="http://unity3d.com/public-relations" target="_blank">Unity Technologies</a>.
+	</div>
+
+	<div>
+	This index is provided by <a href="http://qiita.com/kobake@github" target="_blank">kobake@github</a>.
+	</div>
+</div>
+
+</body>
+</html>

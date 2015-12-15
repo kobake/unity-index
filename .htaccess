@@ -1,4 +1,4 @@
-DirectoryIndex index.html.gz
+DirectoryIndex index.html.gz index.html
 
 RewriteEngine on
 RewriteCond %{HTTP:Accept-Encoding} gzip
