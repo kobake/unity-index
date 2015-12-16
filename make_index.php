@@ -3,6 +3,12 @@ global $DLL;
 global $VER;
 $DLL = "UnityEngine";
 $VER = "5.2.3p1";
+if(isset($_GET['dll'])){
+	$DLL = $_GET['dll'];
+}
+if(isset($_GET['ver'])){
+	$VER = $_GET['ver'];
+}
 ?>
 
 <?php
@@ -17,7 +23,7 @@ $html = str_replace("{\$BODY}", $body, $html);
 $html = str_replace("{\$DLL}", $DLL, $html);
 $html = str_replace("{\$VER}", $VER, $html);
 
-file_put_contents("{$DLL}.html", $html);
+file_put_contents("{$DLL}_{$VER}.html", $html);
 echo $html;
 ?>
 
