@@ -31,8 +31,9 @@ class Program
 	}
 	static void Main2(string[] args)
 	{
+		string dllPath = args[0];
 		//Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.2.3p1\Editor\Data\Managed\UnityEditor.dll");
-		Assembly assembly = Assembly.LoadFrom(@"C:\Program Files\Unity5.2.3p1\Editor\Data\Managed\UnityEngine.dll");
+		Assembly assembly = Assembly.LoadFrom(dllPath);
 
 		foreach (Type type in GetTypes(assembly))
 		{
